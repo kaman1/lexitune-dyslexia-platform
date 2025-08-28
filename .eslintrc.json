@@ -1,0 +1,59 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "no-undef": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-empty-object-type": "off",
+    "no-redeclare": "off"
+  },
+  "globals": {
+    "HTMLElement": "readonly",
+    "HTMLDivElement": "readonly",
+    "HTMLButtonElement": "readonly",
+    "HTMLInputElement": "readonly",
+    "HTMLTextAreaElement": "readonly",
+    "HTMLSelectElement": "readonly",
+    "HTMLAnchorElement": "readonly",
+    "HTMLIFrameElement": "readonly",
+    "HTMLSpanElement": "readonly",
+    "HTMLCanvasElement": "readonly",
+    "HTMLHeadingElement": "readonly",
+    "HTMLParagraphElement": "readonly",
+    "HTMLUListElement": "readonly",
+    "HTMLOListElement": "readonly",
+    "HTMLLIElement": "readonly",
+    "HTMLTableElement": "readonly",
+    "HTMLTableSectionElement": "readonly",
+    "HTMLTableRowElement": "readonly",
+    "HTMLTableCellElement": "readonly",
+    "HTMLTableCaptionElement": "readonly",
+    "MouseEvent": "readonly",
+    "KeyboardEvent": "readonly",
+    "EventListener": "readonly",
+    "ResizeObserver": "readonly",
+    "URL": "readonly",
+    "Response": "readonly",
+    "Request": "readonly",
+    "localStorage": "readonly",
+    "clearTimeout": "readonly"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": ["./tsconfig.json"]
+      }
+    }
+  ]
+}

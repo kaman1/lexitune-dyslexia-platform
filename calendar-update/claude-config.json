@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "outlook-calendar": {
+      "command": "npx",
+      "args": ["@softeria/ms-365-mcp-server"],
+      "env": {
+        "AZURE_CLIENT_ID": "d850b6a3-a6c6-4dc7-a14c-ddfa7665ac56",
+        "AZURE_TENANT_ID": "8850fff5-6296-40f7-8358-777ec76bb8d9",
+        "AZURE_CLIENT_SECRET": "hzW8Q~Q4pSyiXWKfR8FFUXx_Un4KLzR8pU9Hqb1-"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "outlook-calendar-mcp-setup",
+  "version": "1.0.0",
+  "description": "Setup for Outlook Calendar MCP integration",
+  "scripts": {
+    "setup": "./setup.sh",
+    "test-connection": "node test-connection.js"
+  },
+  "dependencies": {
+    "@softeria/ms-365-mcp-server": "^0.17.0"
+  }
+}

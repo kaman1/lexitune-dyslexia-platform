@@ -1,0 +1,82 @@
+# Robots.txt for TEKIMAX
+# Block all crawlers from all paths except contact
+
+User-agent: *
+Disallow: /
+Allow: /contact
+
+# Block specific AI and scraper bots entirely
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: Google-Extended
+User-agent: Anthropic-AI
+User-agent: Claude-Web
+User-agent: ClaudeBot
+User-agent: Bytespider
+User-agent: CCBot
+User-agent: FacebookBot
+User-agent: Omgilibot
+User-agent: Omgili
+User-agent: PetalBot
+User-agent: SemrushBot
+User-agent: AhrefsBot
+User-agent: MJ12bot
+User-agent: ia_archiver
+User-agent: ScraperAPI
+User-agent: ScrapingBee
+User-agent: DataForSeoBot
+User-agent: ZoominfoBot
+User-agent: Diffbot
+User-agent: Algolia Crawler
+User-agent: Blackboard
+User-agent: GrapeshotCrawler
+User-agent: SeznamBot
+User-agent: cohere-ai
+User-agent: anthropic-ai
+User-agent: Midjourney
+User-agent: Perplexity
+User-agent: You-Bot
+User-agent: Python-requests
+User-agent: node-fetch
+User-agent: Scrapy
+User-agent: axios
+User-agent: got
+User-agent: curl
+User-agent: wget
+User-agent: Barkrowler
+User-agent: Gluten Free Crawler
+User-agent: ImagesiftBot
+User-agent: RavenCrawler
+User-agent: WBSearchBot
+User-agent: NaverBot
+User-agent: Baiduspider
+User-agent: sogou
+User-agent: sogou spider
+User-agent: YandexBot
+User-agent: DotBot
+User-agent: MegaIndex
+User-agent: Qwantify
+User-agent: Twitterbot
+User-agent: facebookexternalhit
+User-agent: LinkedInBot
+User-agent: Applebot
+User-agent: Yandex
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Googlebot-Mobile
+User-agent: Googlebot-News
+User-agent: Googlebot-Video
+User-agent: Bingbot
+User-agent: MSNBot
+User-agent: Slurp
+User-agent: DuckDuckBot
+Disallow: /
+
+# Crawl delay for allowed paths
+Crawl-delay: 10
+
+# Sitemap only includes contact page
+Sitemap: https://tekimax.com/sitemap.xml
+
+# X-Robots-Tag: noai
+# X-Robots-Tag: noimageai 
