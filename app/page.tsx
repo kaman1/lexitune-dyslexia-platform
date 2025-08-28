@@ -6,6 +6,7 @@ import { NeurodivergentCards } from "@/components/neurodivergent-cards";
 import { OrtonGillinghamSection } from "@/components/orton-gillingham-section";
 import { DyslexiaMythsSection } from "@/components/dyslexia-myths-section";
 import { NeurodiversitySupportSection } from "@/components/neurodiversity-support-section";
+import { InteractiveFooter } from "@/components/interactive-footer";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <OrtonGillinghamSection />
       <DyslexiaMythsSection />
       <NeurodiversitySupportSection />
+      <InteractiveFooter />
     </main>
   );
 }
