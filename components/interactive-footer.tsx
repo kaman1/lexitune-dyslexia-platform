@@ -20,6 +20,17 @@ import {
   ArrowRight
 } from "lucide-react";
 
+// Custom hook to handle hydration
+const useHydrated = () => {
+  const [isHydrated, setIsHydrated] = React.useState(false);
+  
+  React.useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+  
+  return isHydrated;
+};
+
 const socialLinks = [
   { icon: Github, href: "https://github.com/tekimax", label: "GitHub", color: "hover:text-gray-800" },
   { icon: Twitter, href: "https://twitter.com/tekimax", label: "Twitter", color: "hover:text-blue-500" },
@@ -82,11 +93,24 @@ const floatingTechBadges = [
 const AnimatedTechBadge: React.FC<{ name: string; color: string; x: string; y: string; delay: number }> = ({ 
   name, color, x, y, delay 
 }) => {
+  const isHydrated = useHydrated();
+  
+  if (!isHydrated) {
+    return (
+      <div
+        className={`absolute bg-gradient-to-r ${color} text-white text-sm px-4 py-2 rounded-full shadow-lg cursor-pointer select-none`}
+        style={{ left: x, top: y }}
+      >
+        {name}
+      </div>
+    );
+  }
+  
   return (
     <motion.div
       className={`absolute bg-gradient-to-r ${color} text-white text-sm px-4 py-2 rounded-full shadow-lg cursor-pointer select-none`}
       style={{ left: x, top: y }}
-      initial={{ opacity: 0, scale: 0, rotate: Math.random() * 360 }}
+      initial={{ opacity: 0, scale: 0, rotate: 0 }}
       animate={{ 
         opacity: 1, 
         scale: 1, 
@@ -99,13 +123,13 @@ const AnimatedTechBadge: React.FC<{ name: string; color: string; x: string; y: s
         y: {
           repeat: Infinity,
           repeatType: "reverse",
-          duration: 2 + Math.random() * 2,
+          duration: 2,
           ease: "easeInOut"
         }
       }}
       whileHover={{ 
         scale: 1.1, 
-        rotate: Math.random() * 20 - 10,
+        rotate: 5,
         transition: { duration: 0.2 }
       }}
     >
@@ -158,12 +182,13 @@ const FooterSection: React.FC<{ section: typeof footerSections[0]; index: number
 export function InteractiveFooter() {
   const heroRef = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(heroRef, { once: true });
+  const isHydrated = useHydrated();
 
   return (
     <footer className="relative bg-gradient-to-br from-zinc-50 via-white to-blue-50 pt-20 pb-8 overflow-hidden">
       {/* Animated background tech badges */}
       <div className="absolute inset-0 pointer-events-none">
-        {floatingTechBadges.map((badge, index) => (
+        {isHydrated && floatingTechBadges.map((badge, index) => (
           <AnimatedTechBadge
             key={badge.name}
             {...badge}

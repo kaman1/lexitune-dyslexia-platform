@@ -1,11 +1,13 @@
 "use client";
 
-import { Shield, Zap } from "lucide-react";
+import { Play } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 export function SplitHero() {
   const [videoError, setVideoError] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
     <>
@@ -52,7 +54,11 @@ export function SplitHero() {
             </video>
           )}
 
+          {/* Dark overlay for better text legibility */}
+          <div className="absolute inset-0 bg-black/40"></div>
+
         </div>
+
 
         {/* Content container */}
         <div className="max-w-[1536px] mx-auto px-4 h-full relative z-20">
@@ -70,7 +76,7 @@ export function SplitHero() {
               <div className="flex flex-col">
                 <a
                   href="/dashboard"
-                  className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90 hover:scale-105 hover:shadow-lg transition-all duration-300 rounded-xl transform"
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white hover:bg-opacity-90 hover:scale-105 hover:shadow-lg transition-all duration-300 rounded-xl transform"
                   style={{ backgroundColor: '#2563EB' }}
                 >
                   Create Account
@@ -79,6 +85,33 @@ export function SplitHero() {
                   Beta only allows a limited pool of users
                 </p>
               </div>
+              
+              {/* Watch Video Button */}
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <button className="inline-flex items-center justify-center px-6 h-11 text-sm font-medium text-white hover:bg-opacity-90 hover:scale-105 hover:shadow-lg transition-all duration-300 rounded-xl transform"
+                    style={{ backgroundColor: '#059669' }}>
+                    <Play className="h-4 w-4 mr-2 fill-current" />
+                    Watch Video
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="max-w-5xl w-full p-0 bg-black border-0 rounded-xl overflow-hidden">
+                  <DialogTitle className="sr-only">Tekimax Video</DialogTitle>
+                  <DialogDescription className="sr-only">Watch our video showcasing the platform</DialogDescription>
+                  <div className="relative aspect-video bg-black overflow-hidden">
+                    <video
+                      className="w-full h-full object-cover"
+                      controls
+                      autoPlay
+                      poster="https://images.unsplash.com/photo-1625014053925-88bef4805a76?q=80&w=1528&auto=format&fit=crop"
+                    >
+                      <source src="/video.mp4" type="video/mp4" />
+                      <source src="https://comercialsa1756413958.blob.core.windows.net/videos/final-comercial.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>

@@ -11,21 +11,43 @@ import { useRouter } from "next/navigation";
 const readingFeatures = [
   {
     src: "https://images.unsplash.com/photo-1724245047328-431c55de6cb7?q=80&w=1828&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Personalized Practice Generation",
-    category: "AI Core",
+    title: "Orton-Gillingham AI Tutor",
+    category: "Reading Support",
     content: (
       <div className="space-y-6">
         <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          Our AI dynamically creates decodable texts, word lists, and phonemic awareness drills tailored to your current reading level and progress.
+          AI-powered Orton-Gillingham instruction that provides structured, multisensory learning with personalized decodable texts and phonemic awareness drills.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Adaptive Learning</h4>
-            <p className="text-sm text-blue-700 dark:text-blue-200">Content adjusts to your individual progress and learning pace</p>
+            <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Multisensory Learning</h4>
+            <p className="text-sm text-blue-700 dark:text-blue-200">Visual, auditory, and kinesthetic approaches combined</p>
           </div>
           <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-green-900 dark:text-green-100 mb-2">OG Fidelity</h4>
-            <p className="text-sm text-green-700 dark:text-green-200">Maintains Orton-Gillingham methodology principles</p>
+            <h4 className="font-semibold text-green-900 dark:text-green-100 mb-2">Structured Approach</h4>
+            <p className="text-sm text-green-700 dark:text-green-200">Systematic phonics instruction following OG methodology</p>
+          </div>
+        </div>
+      </div>
+    )
+  },
+  {
+    src: "https://plus.unsplash.com/premium_photo-1676422355760-d7027256faef?q=80&w=892&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Pomodoro Technique",
+    category: "Time Management",
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg text-neutral-600 dark:text-neutral-300">
+          Built-in Pomodoro technique timer with customizable work/break intervals to help maintain focus and prevent cognitive overload during learning sessions.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-purple-900 dark:text-purple-100 mb-2">Customizable Intervals</h4>
+            <p className="text-sm text-purple-700 dark:text-purple-200">Adjust work/break times to match your attention span</p>
+          </div>
+          <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-orange-900 dark:text-orange-100 mb-2">Focus Tracking</h4>
+            <p className="text-sm text-orange-700 dark:text-orange-200">Monitor your productivity patterns and optimize sessions</p>
           </div>
         </div>
       </div>
@@ -33,87 +55,65 @@ const readingFeatures = [
   },
   {
     src: "https://images.unsplash.com/photo-1659698328281-53fc377cebcb?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "AI Voice for Multisensory Learning",
-    category: "Voice Technology",
-    content: (
-      <div className="space-y-6">
-        <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          Advanced AI voice technology provides accurate phoneme modeling and immediate pronunciation feedback for enhanced multisensory learning.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-purple-900 dark:text-purple-100 mb-2">Precise Pronunciation</h4>
-            <p className="text-sm text-purple-700 dark:text-purple-200">Accurate phoneme modeling for clear sound recognition</p>
-          </div>
-          <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-orange-900 dark:text-orange-100 mb-2">Instant Feedback</h4>
-            <p className="text-sm text-orange-700 dark:text-orange-200">Immediate correction and guidance during reading practice</p>
-          </div>
-        </div>
-      </div>
-    )
-  },
-  {
-    src: "https://plus.unsplash.com/premium_photo-1664372145591-f7cc308ff5da?q=80&w=996&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "24/7 At-Home OG Support",
+    title: "Audio & Visual",
     category: "Accessibility",
     content: (
       <div className="space-y-6">
         <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          Round-the-clock access to AI-powered reading instruction and practice sessions, bringing Orton-Gillingham methodology into your home.
+          Comprehensive audio and visual support with customizable sound settings, visual preferences, and adaptive controls for optimal learning conditions.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-pink-50 dark:bg-pink-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-pink-900 dark:text-pink-100 mb-2">Flexible Scheduling</h4>
-            <p className="text-sm text-pink-700 dark:text-pink-200">Practice anytime that fits your schedule and energy levels</p>
+            <h4 className="font-semibold text-pink-900 dark:text-pink-100 mb-2">Audio Controls</h4>
+            <p className="text-sm text-pink-700 dark:text-pink-200">Adjust volume, pitch, and audio feedback settings</p>
           </div>
           <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-2">Consistent Practice</h4>
-            <p className="text-sm text-yellow-700 dark:text-yellow-200">Maintains learning momentum outside traditional hours</p>
+            <h4 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-2">Visual Preferences</h4>
+            <p className="text-sm text-yellow-700 dark:text-yellow-200">Customize colors, fonts, and visual layouts</p>
           </div>
         </div>
       </div>
     )
   },
-  {
-    src: "/2.mp4",
-    title: "Video Tips & Tutorials",
-    category: "Learning Resources",
-    content: (
-      <div className="space-y-6">
-        <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          Access comprehensive video tutorials and tips to enhance your reading journey with step-by-step guidance and expert insights.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-red-900 dark:text-red-100 mb-2">Step-by-Step Guides</h4>
-            <p className="text-sm text-red-700 dark:text-red-200">Detailed tutorials for every reading technique and strategy</p>
-          </div>
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Expert Insights</h4>
-            <p className="text-sm text-blue-700 dark:text-blue-200">Professional tips and best practices from reading specialists</p>
-          </div>
-        </div>
-      </div>
-    )
-  },
+            {
+            src: "/2.mp4",
+            title: "ADHD Video Interventions",
+            category: "Learning Resources",
+            content: (
+              <div className="space-y-6">
+                <p className="text-lg text-neutral-600 dark:text-neutral-300">
+                  Research-backed video interventions designed specifically for adults with ADHD, featuring participatory design and evidence-based techniques from clinical studies.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-xl">
+                    <h4 className="font-semibold text-red-900 dark:text-red-100 mb-2">Participatory Design</h4>
+                    <p className="text-sm text-red-700 dark:text-red-200">Videos co-created with adults with ADHD for real-world relevance</p>
+                  </div>
+                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl">
+                    <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Evidence-Based</h4>
+                    <p className="text-sm text-blue-700 dark:text-blue-200">Clinical trial validated interventions and techniques</p>
+                  </div>
+                </div>
+              </div>
+            )
+          },
   {
     src: "https://images.unsplash.com/photo-1625014053925-88bef4805a76?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Visual-Spatial Processing Support",
-    category: "Cognitive Enhancement",
+    title: "Task Management",
+    category: "Organization",
     content: (
       <div className="space-y-6">
         <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          Leverages your natural visual-spatial strengths to enhance word recognition, text pattern recognition, and reading comprehension.
+          Intelligent task management system with priority setting, progress tracking, and adaptive reminders to help organize learning goals and daily activities.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-cyan-50 dark:bg-cyan-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-cyan-900 dark:text-cyan-100 mb-2">Word Visualization</h4>
-            <p className="text-sm text-cyan-700 dark:text-cyan-200">Enhanced ability to visualize words and text patterns</p>
+            <h4 className="font-semibold text-cyan-900 dark:text-cyan-100 mb-2">Priority Setting</h4>
+            <p className="text-sm text-cyan-700 dark:text-cyan-200">Organize tasks by importance and urgency</p>
           </div>
           <div className="bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-emerald-900 dark:text-emerald-100 mb-2">Pattern Recognition</h4>
-            <p className="text-sm text-emerald-700 dark:text-emerald-200">Improved ability to recognize text structures and patterns</p>
+            <h4 className="font-semibold text-emerald-900 dark:text-emerald-100 mb-2">Progress Tracking</h4>
+            <p className="text-sm text-emerald-700 dark:text-emerald-200">Visual progress indicators for motivation</p>
           </div>
         </div>
       </div>
@@ -121,26 +121,70 @@ const readingFeatures = [
   },
   {
     src: "https://images.unsplash.com/photo-1703801602658-ee1840697ef8?q=80&w=1180&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Data-Driven Progress Tracking",
-    category: "Analytics",
+    title: "Adjustments",
+    category: "Accessibility",
     content: (
       <div className="space-y-6">
         <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          Comprehensive analytics track your progress across hundreds of micro-skills, identifying learning gaps and providing precise intervention guidance.
+          Customizable environment controls including font sizes, color schemes, audio settings, and visual preferences to create optimal learning conditions.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-indigo-900 dark:text-indigo-100 mb-2">Skill Gap Analysis</h4>
-            <p className="text-sm text-indigo-700 dark:text-indigo-200">Identifies specific areas needing attention and reteaching</p>
+            <h4 className="font-semibold text-indigo-900 dark:text-indigo-100 mb-2">Visual Customization</h4>
+            <p className="text-sm text-indigo-700 dark:text-indigo-200">Adjust fonts, colors, and spacing for comfort</p>
           </div>
           <div className="bg-teal-50 dark:bg-teal-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-teal-900 dark:text-teal-100 mb-2">Progress Trends</h4>
-            <p className="text-sm text-teal-700 dark:text-teal-200">Long-term tracking shows improvement patterns over time</p>
+            <h4 className="font-semibold text-teal-900 dark:text-teal-100 mb-2">Audio Controls</h4>
+            <p className="text-sm text-teal-700 dark:text-teal-200">Manage sound levels and audio feedback</p>
           </div>
         </div>
       </div>
     )
-  }
+  },
+  {
+    src: "https://images.unsplash.com/photo-1558244661-d248897f7bc4?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Cognitive Load Management",
+    category: "Learning Support",
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg text-neutral-600 dark:text-neutral-300">
+          AI-powered cognitive load monitoring and adjustment system that adapts content complexity and presentation based on your current mental capacity.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-violet-50 dark:bg-violet-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-violet-900 dark:text-violet-100 mb-2">Load Monitoring</h4>
+            <p className="text-sm text-violet-700 dark:text-violet-200">Tracks cognitive fatigue and adjusts accordingly</p>
+          </div>
+          <div className="bg-rose-50 dark:bg-rose-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-rose-900 dark:text-rose-100 mb-2">Adaptive Content</h4>
+            <p className="text-sm text-rose-700 dark:text-rose-200">Simplifies or enriches content based on capacity</p>
+          </div>
+        </div>
+      </div>
+    )
+  },
+  {
+    src: "https://images.unsplash.com/photo-1662144374212-75bf8d6f9995?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "Self-Diagnosis & Support",
+    category: "Assessment",
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg text-neutral-600 dark:text-neutral-300">
+          Comprehensive self-assessment tools and support resources to help identify learning preferences, challenges, and personalized strategies for improvement.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-2">Learning Assessment</h4>
+            <p className="text-sm text-amber-700 dark:text-amber-200">Identify strengths and areas for growth</p>
+          </div>
+          <div className="bg-lime-50 dark:bg-lime-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-lime-900 dark:text-lime-100 mb-2">Strategy Recommendations</h4>
+            <p className="text-sm text-lime-700 dark:text-lime-200">Personalized approaches based on assessment</p>
+          </div>
+        </div>
+      </div>
+    )
+  },
 ];
 
 export default function Dashboard() {
@@ -227,7 +271,7 @@ export default function Dashboard() {
               Welcome back Christian
             </h1>
             <p className="text-base md:text-lg opacity-90 max-w-2xl">
-              Your personalized AI-enhanced reading support platform, designed to unlock your reading potential through Orton-Gillingham methodology.
+              Your comprehensive neurodivergent support solution, featuring AI-enhanced tools and apps designed to empower your unique learning journey.
             </p>
           </div>
         </div>
@@ -239,10 +283,10 @@ export default function Dashboard() {
           <div className="flex justify-between items-start">
             <div>
               <h2 className="text-2xl font-bold mb-3 text-left" style={{color: '#333B68'}}>
-                Your AI-Enhanced Reading Features
+                Your Neurodivergent Support Tools
               </h2>
               <p className="text-base text-zinc-600 text-left max-w-2xl">
-                Explore our comprehensive suite of AI-powered tools designed to support your reading journey with personalized, research-backed approaches.
+                Explore our comprehensive suite of AI-powered tools and apps designed to support neurodivergent individuals with personalized, research-backed approaches.
               </p>
             </div>
             
@@ -250,15 +294,26 @@ export default function Dashboard() {
             <div className="flex items-center space-x-3">
               {/* Dropdown Filter */}
               <Select onValueChange={setSelectedCategory} defaultValue="all">
-                <SelectTrigger className="w-auto bg-white rounded-full px-3 py-2 h-auto border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                  <SelectValue placeholder="All Categories" />
+                <SelectTrigger className="w-auto bg-white rounded-xl px-3 py-2 h-auto border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                  <SelectValue placeholder="All Tools" />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map(category => (
-                    <SelectItem key={category} value={category}>
-                      {category === "all" ? "All Categories" : category}
-                    </SelectItem>
-                  ))}
+                  {categories.map(category => {
+                    const displayName = category === "all" ? "All Tools" :
+                      category === "Reading Support" ? "Reading & Learning" :
+                      category === "Time Management" ? "Time & Focus" :
+                      category === "Accessibility" ? "Accessibility & Comfort" :
+                      category === "Learning Resources" ? "Tutorials & Guides" :
+                      category === "Organization" ? "Organization & Tasks" :
+                      category === "Learning Support" ? "Learning Support" :
+                      category === "Assessment" ? "Assessment & Self-Help" :
+                      category;
+                    return (
+                      <SelectItem key={category} value={category}>
+                        {displayName}
+                      </SelectItem>
+                    );
+                  })}
                 </SelectContent>
               </Select>
               
