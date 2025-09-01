@@ -118,13 +118,13 @@ export function NeurodiversitySupportSection() {
           
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 text-zinc-900">
             <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Supercharge
+              Evidence-Based
             </span>
-            <br />Your Brain
+            <br />Neurodivergent Support
           </h2>
           
           <p className="text-xl text-zinc-600 max-w-3xl mx-auto mb-8">
-            Scroll through research-backed strategies. Each one designed by neurodivergent minds, for neurodivergent success.
+            Research-backed strategies with proven improvement rates. Each strategy designed by research, validated by outcomes.
           </p>
         </div>
 

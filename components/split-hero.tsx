@@ -68,7 +68,7 @@ export function SplitHero() {
               Empowering<br />Neurodivergent<br />Minds
             </h1>
                           <p className="mt-6 text-lg text-gray-200 max-w-3xl">
-                Comprehensive support and adaptive learning tools for all neurodivergent learners - from ADHD and Autism to Dyslexia and beyond. Evidence-based strategies that celebrate cognitive differences and unlock potential.
+                Orton-Gillingham reading instruction, Pomodoro time management, and evidence-based cognitive strategies. Our AI amplifies what research shows works.
               </p>
 
             {/* CTA Buttons */}

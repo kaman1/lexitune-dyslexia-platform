@@ -35,3 +35,4 @@ y/*
 !y/*.ts
 public/_next-video
 .wrangler/
+public/

@@ -20,6 +20,9 @@ import {
   Users,
   Shield,
   ShoppingBag,
+  Smartphone,
+  Brain,
+  Zap,
 } from "lucide-react";
 
 const ListItem = React.forwardRef<
@@ -48,6 +51,13 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 export function MainNavigationMenu() {
   return (
     <NavigationMenu>
@@ -61,20 +71,36 @@ export function MainNavigationMenu() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger>About</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Platform</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] md:grid-cols-2">
-              <ListItem href="/#philosophy" title="Our Mission & Vision">
-                Our mission to empower neurodivergent students and vision to expand beyond EdTech to transform organizations.
+              <ListItem 
+                href="#" 
+                title="AI-Powered Support"
+                onClick={(e) => { e.preventDefault(); scrollToSection('ai-support'); }}
+              >
+                Our comprehensive AI platform with reading tutor, Pomodoro timer, and cognitive load management.
               </ListItem>
-              <ListItem href="/#about" title="About Tekimax">
-                Learn about our company, values, and commitment to solving hard problems with social and national security impact.
+              <ListItem 
+                href="#" 
+                title="Research-Backed Methods"
+                onClick={(e) => { e.preventDefault(); scrollToSection('research-methods'); }}
+              >
+                Evidence-based approaches including Orton-Gillingham and proven cognitive strategies.
               </ListItem>
-              <ListItem href="/#solution" title="Our Solution">
-                AI self-adaptive platform that personalizes learning for neurodivergent students with advanced technology.
+              <ListItem 
+                href="#" 
+                title="Cognitive Strengths"
+                onClick={(e) => { e.preventDefault(); scrollToSection('cognitive-strengths'); }}
+              >
+                Discover the unique cognitive patterns and strengths of neurodivergent minds.
               </ListItem>
-              <ListItem href="/#neurodivergent-strengths" title="Neurodivergent Strengths">
-                Discover the unique superpowers that neurodivergent minds bring to STEM fields and innovation.
+              <ListItem 
+                href="#" 
+                title="Coming Soon"
+                onClick={(e) => { e.preventDefault(); scrollToSection('coming-soon'); }}
+              >
+                Mobile app, smartwatch integration, and smart peripherals launching soon.
               </ListItem>
             </ul>
           </NavigationMenuContent>

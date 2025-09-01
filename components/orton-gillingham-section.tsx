@@ -12,8 +12,8 @@ export function OrtonGillinghamSection() {
           {/* Hero Image */}
           <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl mb-16">
             <Image
-              src="https://images.unsplash.com/photo-1650844228078-6c3cb119abcd?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="AI-augmented Orton-Gillingham reading instruction"
+              src="https://images.unsplash.com/photo-1724245047328-431c55de6cb7?q=80&w=1828&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="AI-powered neurodivergent support platform"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
@@ -21,10 +21,10 @@ export function OrtonGillinghamSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
             <div className="absolute bottom-8 left-8 right-8 text-white">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                AI-Augmented Orton-Gillingham
+                AI-Powered Neurodivergent Support
               </h2>
               <p className="text-lg md:text-xl opacity-90 max-w-2xl">
-                The future of reading instruction, combining proven methodology with AI-powered personalization.
+                Comprehensive suite of tools and apps designed to empower your unique learning journey.
               </p>
             </div>
           </div>
@@ -34,27 +34,27 @@ export function OrtonGillinghamSection() {
             {/* Left Column - Text */}
             <div>
               <h2 className="text-3xl font-medium mb-6 tracking-tight" style={{color: '#333B68'}}>
-                AI-Augmented Orton-Gillingham: The Future of Reading Instruction
+                Your Comprehensive Neurodivergent Support Platform
               </h2>
               <p className="text-zinc-600 mb-6 leading-relaxed">
-                Orton-Gillingham is the gold standard for structured, multisensory reading instruction. Our AI doesn't replace trained educators—it amplifies their reach and resources while preserving the human-centered, individualized spirit of the approach.
+                Our AI platform provides personalized tools and apps designed specifically for neurodivergent individuals, featuring research-backed approaches and adaptive technology.
               </p>
               <p className="text-zinc-600 mb-8 leading-relaxed">
-                We use Large Language Models and AI voice technology to augment traditional OG methods, providing personalized practice, dynamic lesson planning, and 24/7 accessibility without diluting the proven methodology.
+                From reading support and time management to cognitive load optimization and accessibility controls, every feature is crafted to enhance your learning experience and support your unique cognitive profile.
               </p>
             </div>
 
-            {/* Right Column - Cards in Two Columns */}
+            {/* Right Column - Feature Cards in Two Columns */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
                 <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
                   <Users className="h-6 w-6 text-blue-600" />
                 </div>
                 <h4 className="text-lg font-semibold mb-3" style={{color: '#333B68'}}>
-                  Personalized Practice Generation
+                  AI Reading Tutor
                 </h4>
                 <p className="text-zinc-600 text-sm">
-                  LLMs dynamically generate decodable texts, word lists, and phonemic awareness drills tailored to each student's current scope and sequence.
+                  Personalized Orton-Gillingham instruction with AI-generated decodable texts and multisensory learning approaches.
                 </p>
               </div>
 
@@ -63,10 +63,10 @@ export function OrtonGillinghamSection() {
                   <Mic className="h-6 w-6 text-green-600" />
                 </div>
                 <h4 className="text-lg font-semibold mb-3" style={{color: '#333B68'}}>
-                  AI Voice for Multisensory Engagement
+                  Pomodoro Timer
                 </h4>
                 <p className="text-zinc-600 text-sm">
-                  AI voice technology reinforces the auditory aspect of OG's multisensory approach with precision and patience.
+                  Built-in focus timer with customizable work/break intervals to maintain concentration and prevent cognitive overload.
                 </p>
               </div>
 
@@ -75,10 +75,10 @@ export function OrtonGillinghamSection() {
                   <BarChart3 className="h-6 w-6 text-purple-600" />
                 </div>
                 <h4 className="text-lg font-semibold mb-3" style={{color: '#333B68'}}>
-                  Data-Driven Insight & Precision Review
+                  Task Management
                 </h4>
                 <p className="text-zinc-600 text-sm">
-                  AI tools track progress across hundreds of micro-skills, providing educators with precise intervention guidance.
+                  Intelligent task organization with priority setting, progress tracking, and adaptive reminders for learning goals.
                 </p>
               </div>
 
@@ -87,10 +87,10 @@ export function OrtonGillinghamSection() {
                   <Clock className="h-6 w-6 text-orange-600" />
                 </div>
                 <h4 className="text-lg font-semibold mb-3" style={{color: '#333B68'}}>
-                  24/7 At-Home OG Support
+                  Cognitive Load Management
                 </h4>
                 <p className="text-zinc-600 text-sm">
-                  LLM-powered apps bring OG-like instruction into homes, maintaining consistency and engagement outside traditional hours.
+                  AI-powered system that monitors cognitive fatigue and adapts content complexity for optimal learning conditions.
                 </p>
               </div>
             </div>
