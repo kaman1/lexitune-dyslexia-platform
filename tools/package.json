@@ -1,0 +1,16 @@
+{
+  "name": "tekimax-tools",
+  "version": "1.0.0",
+  "description": "Tools for TEKIMAX website development",
+  "main": "thumbnail-generator.js",
+  "scripts": {
+    "generate-thumbnails": "node thumbnail-generator.js",
+    "generate-thumbnail": "node thumbnail-generator.js",
+    "test-ffmpeg": "ffmpeg -version"
+  },
+  "keywords": ["thumbnail", "video", "ffmpeg", "tekimax"],
+  "author": "TEKIMAX",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}

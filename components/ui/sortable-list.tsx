@@ -24,6 +24,25 @@ export type Item = {
   isCompleted: boolean
   isRunning: boolean
   remainingTime: number
+  // AI optimization properties
+  customBreak?: {
+    type: 'short' | 'long' | 'custom'
+    duration: number
+    activity: string
+    description: string
+  }
+  priority?: 'urgent' | 'high' | 'medium' | 'low'
+  category?: 'work' | 'personal' | 'learning' | 'health' | 'creative'
+  energyLevel?: 'low' | 'medium' | 'high'
+  complexity?: 'simple' | 'moderate' | 'complex'
+  // Original todo info for syncing back to mylist
+  originalTodoId?: string
+  originalListId?: string
+  originalCategory?: 'work' | 'personal' | 'learning' | 'health' | 'creative'
+  originalPriority?: 'urgent' | 'high' | 'medium' | 'low'
+  originalEstimatedTime?: number
+  originalDueDate?: string
+  originalTags?: string[]
 }
 
 interface SortableListItemProps {
@@ -179,6 +198,52 @@ function SortableListItem({
                               {Math.floor(item.remainingTime / 60)}:{(item.remainingTime % 60).toString().padStart(2, '0')}
                             </span>
                           </div>
+                        </div>
+                      )}
+
+                      {/* AI Optimization Details */}
+                      {!item.checked && (item.priority || item.category || item.customBreak) && (
+                        <div className="flex flex-wrap gap-2 mt-3">
+                          {item.priority && (
+                            <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                              item.priority === 'urgent' ? 'bg-red-100 text-red-800' :
+                              item.priority === 'high' ? 'bg-orange-100 text-orange-800' :
+                              item.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                              'bg-green-100 text-green-800'
+                            }`}>
+                              {item.priority}
+                            </div>
+                          )}
+                          {item.category && (
+                            <div className="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 capitalize">
+                              {item.category}
+                            </div>
+                          )}
+                          {item.customBreak && (
+                            <div className="px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                              🧘 {item.customBreak.type} break
+                            </div>
+                          )}
+                          {/* Sync Status Indicator */}
+                          {item.originalTodoId && (
+                            <div className="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 flex items-center gap-1">
+                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                              </svg>
+                              Synced
+                            </div>
+                          )}
+                          
+                          {/* AI Time Optimization Indicator */}
+                          {item.originalEstimatedTime && item.remainingTime && 
+                           Math.abs((item.originalEstimatedTime * 60) - item.remainingTime) > 60 && (
+                            <div className="px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 flex items-center gap-1">
+                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                              </svg>
+                              AI Time
+                            </div>
+                          )}
                         </div>
                       )}
                     </motion.div>

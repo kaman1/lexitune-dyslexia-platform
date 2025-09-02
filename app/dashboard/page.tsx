@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Home, Settings, CreditCard, HelpCircle, Search, Video } from "lucide-react";
 import { ResetIcon } from "@radix-ui/react-icons";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
 import { DashboardOnboarding } from "@/components/dashboard-onboarding";
@@ -110,22 +111,27 @@ const readingFeatures = [
           },
   {
     src: "https://images.unsplash.com/photo-1625014053925-88bef4805a76?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Task Management",
+    title: "My Lists",
     category: "Organization",
     content: (
       <div className="space-y-6">
         <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          Intelligent task management system with priority setting, progress tracking, and adaptive reminders to help organize learning goals and daily activities.
+          AI-powered task management system with intelligent categorization, priority setting, and Pomodoro optimization to help organize your learning goals and daily activities.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-cyan-50 dark:bg-cyan-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-cyan-900 dark:text-cyan-100 mb-2">Priority Setting</h4>
-            <p className="text-sm text-cyan-700 dark:text-cyan-200">Organize tasks by importance and urgency</p>
+            <h4 className="font-semibold text-cyan-900 dark:text-cyan-100 mb-2">Smart Lists</h4>
+            <p className="text-sm text-cyan-700 dark:text-cyan-200">Organize tasks by category and priority</p>
           </div>
           <div className="bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-emerald-900 dark:text-emerald-100 mb-2">Progress Tracking</h4>
-            <p className="text-sm text-emerald-700 dark:text-emerald-200">Visual progress indicators for motivation</p>
+            <h4 className="font-semibold text-emerald-900 dark:text-emerald-100 mb-2">AI Optimization</h4>
+            <p className="text-sm text-emerald-700 dark:text-emerald-200">Break down tasks into optimal Pomodoro sessions</p>
           </div>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">
+            Click the card to access your personalized task lists
+          </p>
         </div>
       </div>
     )
@@ -271,12 +277,18 @@ export default function Dashboard() {
     router.push('/pomodoro');
   };
 
+  const handleMyListsEnter = () => {
+    router.push('/mylist');
+  };
+
   const carouselItems = filteredFeatures.map((feature, index) => {
     const handleCardClick = () => {
       if (feature.title === "Pomodoro Technique") {
         handlePomodoroEnter();
       } else if (feature.title === "ADHD Video Interventions") {
         handleVideoEnter();
+      } else if (feature.title === "My Lists") {
+        handleMyListsEnter();
       }
     };
 
