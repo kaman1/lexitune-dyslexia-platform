@@ -1,0 +1,26 @@
+# LiveKit Server Configuration for Local Development
+# Simplified configuration that works with the current version
+
+# Server settings
+port: 7880
+rtc:
+  tcp_port: 7881
+  port_range_start: 50000
+  port_range_end: 50100
+  use_external_ip: false
+
+# API settings for local development
+keys:
+  devkey: secret
+
+# Logging
+log_level: info
+
+# Room settings
+room:
+  # Allow room creation without authentication for testing
+  auto_create: true
+  # Room cleanup after participants leave (in seconds)
+  empty_timeout: 600
+  # Max participants per room
+  max_participants: 20

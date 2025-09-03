@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { Home, Settings, CreditCard, HelpCircle, Search, Video } from "lucide-react";
+import { Home, Settings, CreditCard, HelpCircle, Search, Video, Volume2, TestTube, ArrowRight } from "lucide-react";
 import { ResetIcon } from "@radix-ui/react-icons";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 
@@ -22,22 +22,27 @@ import {
 const readingFeatures = [
   {
     src: "https://images.unsplash.com/photo-1724245047328-431c55de6cb7?q=80&w=1828&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Orton-Gillingham AI Tutor",
+    title: "Pronunciation Learning",
     category: "Reading Support",
     content: (
       <div className="space-y-6">
         <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          AI-powered Orton-Gillingham instruction that provides structured, multisensory learning with personalized decodable texts and phonemic awareness drills.
+          Master word pronunciation with AI assistance. Learn how to pronounce words correctly with phonetic breakdowns and AI-generated speech using the AI SDK.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Multisensory Learning</h4>
-            <p className="text-sm text-blue-700 dark:text-blue-200">Visual, auditory, and kinesthetic approaches combined</p>
+            <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">AI TTS</h4>
+            <p className="text-sm text-blue-700 dark:text-blue-200">Real-time text-to-speech using OpenAI's advanced models</p>
           </div>
           <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-green-900 dark:text-green-100 mb-2">Structured Approach</h4>
-            <p className="text-sm text-green-700 dark:text-green-200">Systematic phonics instruction following OG methodology</p>
+            <h4 className="font-semibold text-green-900 dark:text-green-100 mb-2">Phonetic Learning</h4>
+            <p className="text-sm text-green-700 dark:text-green-200">Break down words into pronunciation components</p>
           </div>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">
+            Click the card to access the Pronunciation Learning tool
+          </p>
         </div>
       </div>
     )
@@ -67,29 +72,61 @@ const readingFeatures = [
   },
   {
     src: "https://images.unsplash.com/photo-1659698328281-53fc377cebcb?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Audio & Visual",
+    title: "AI Audio Reader",
     category: "Accessibility",
     content: (
       <div className="space-y-6">
         <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          Comprehensive audio and visual support with customizable sound settings, visual preferences, and adaptive controls for optimal learning conditions.
+          Upload any PDF and let AI read it aloud. Perfect for learning, accessibility, and multitasking with customizable audio settings.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-pink-50 dark:bg-pink-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-pink-900 dark:text-pink-100 mb-2">Audio Controls</h4>
-            <p className="text-sm text-pink-700 dark:text-pink-200">Adjust volume, pitch, and audio feedback settings</p>
+            <h4 className="font-semibold text-pink-900 dark:text-pink-100 mb-2">PDF to Audio</h4>
+            <p className="text-sm text-pink-700 dark:text-pink-200">Convert any PDF document to high-quality audio</p>
           </div>
           <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-2">Visual Preferences</h4>
-            <p className="text-sm text-yellow-700 dark:text-yellow-200">Customize colors, fonts, and visual layouts</p>
+            <h4 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-2">AI Reading</h4>
+            <p className="text-sm text-yellow-700 dark:text-yellow-200">Advanced AI technology for natural-sounding speech</p>
           </div>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">
+            Click the card to access the AI Audio Reader
+          </p>
+        </div>
+      </div>
+    )
+    },
+  {
+    src: "/ai assitant.png",
+    title: "AI Conversation",
+    category: "Learning Support",
+    content: (
+      <div className="space-y-6">
+        <p className="text-lg text-neutral-600 dark:text-neutral-300">
+          Have real-time voice conversations with AI. Practice pronunciation, ask questions, and receive instant audio responses for an interactive learning experience.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-purple-900 dark:text-purple-100 mb-2">Voice Input</h4>
+            <p className="text-sm text-purple-700 dark:text-purple-200">Speak naturally and get instant AI responses</p>
+          </div>
+          <div className="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-indigo-900 dark:text-indigo-100 mb-2">Audio Output</h4>
+            <p className="text-sm text-indigo-700 dark:text-indigo-200">Hear AI responses in natural-sounding speech</p>
+          </div>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">
+            Click the card to start an AI conversation
+          </p>
         </div>
       </div>
     )
   },
-            {
-            src: "/2.mp4",
-            title: "ADHD Video Interventions",
+  {
+    src: "/2.mp4",
+    title: "ADHD Video Interventions",
             category: "Learning Resources",
             content: (
               <div className="space-y-6">
@@ -146,14 +183,19 @@ const readingFeatures = [
           Customizable environment controls including font sizes, color schemes, audio settings, and visual preferences to create optimal learning conditions.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-indigo-900 dark:text-indigo-100 mb-2">Visual Customization</h4>
-            <p className="text-sm text-indigo-700 dark:text-indigo-200">Adjust fonts, colors, and spacing for comfort</p>
+          <div className="bg-gray-50 dark:bg-gray-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Visual Customization</h4>
+            <p className="text-sm text-gray-700 dark:text-gray-200">Adjust fonts, colors, and spacing for comfort</p>
           </div>
-          <div className="bg-teal-50 dark:bg-teal-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-teal-900 dark:text-teal-100 mb-2">Audio Controls</h4>
-            <p className="text-sm text-teal-700 dark:text-teal-200">Manage sound levels and audio feedback</p>
+          <div className="bg-gray-50 dark:bg-gray-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Audio Controls</h4>
+            <p className="text-sm text-gray-700 dark:text-gray-200">Manage sound levels and audio feedback</p>
           </div>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">
+            Coming Soon
+          </p>
         </div>
       </div>
     )
@@ -168,40 +210,23 @@ const readingFeatures = [
           AI-powered cognitive load monitoring and adjustment system that adapts content complexity and presentation based on your current mental capacity.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-violet-50 dark:bg-violet-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-violet-900 dark:text-violet-100 mb-2">Load Monitoring</h4>
-            <p className="text-sm text-violet-700 dark:text-violet-200">Tracks cognitive fatigue and adjusts accordingly</p>
+          <div className="bg-gray-50 dark:bg-gray-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Load Monitoring</h4>
+            <p className="text-sm text-gray-700 dark:text-gray-200">Tracks cognitive fatigue and adjusts accordingly</p>
           </div>
-          <div className="bg-rose-50 dark:bg-rose-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-rose-900 dark:text-rose-100 mb-2">Adaptive Content</h4>
-            <p className="text-sm text-rose-700 dark:text-rose-200">Simplifies or enriches content based on capacity</p>
+          <div className="bg-gray-50 dark:bg-gray-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Adaptive Content</h4>
+            <p className="text-sm text-gray-700 dark:text-gray-200">Simplifies or enriches content based on capacity</p>
           </div>
+        </div>
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">
+            Coming Soon
+          </p>
         </div>
       </div>
     )
-  },
-  {
-    src: "https://images.unsplash.com/photo-1662144374212-75bf8d6f9995?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Self-Diagnosis & Support",
-    category: "Assessment",
-    content: (
-      <div className="space-y-6">
-        <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          Comprehensive self-assessment tools and support resources to help identify learning preferences, challenges, and personalized strategies for improvement.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-2">Learning Assessment</h4>
-            <p className="text-sm text-amber-700 dark:text-amber-200">Identify strengths and areas for growth</p>
-          </div>
-          <div className="bg-lime-50 dark:bg-lime-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-lime-900 dark:text-lime-100 mb-2">Strategy Recommendations</h4>
-            <p className="text-sm text-lime-700 dark:text-lime-200">Personalized approaches based on assessment</p>
-          </div>
-        </div>
-      </div>
-    )
-  },
+  }
 ];
 
 // Video background options
@@ -281,14 +306,33 @@ export default function Dashboard() {
     router.push('/mylist');
   };
 
+  const handleAudioReaderEnter = () => {
+    router.push('/audio');
+  };
+
+  const handleOGPronunciationEnter = () => {
+    router.push('/og');
+  };
+
+  const handleAIConversationEnter = () => {
+    // Navigate directly to the real-time API service in the same tab
+    window.location.href = 'http://localhost:3005';
+  };
+
   const carouselItems = filteredFeatures.map((feature, index) => {
     const handleCardClick = () => {
-      if (feature.title === "Pomodoro Technique") {
+      if (feature.title === "Pronunciation Learning") {
+        handleOGPronunciationEnter();
+      } else if (feature.title === "Pomodoro Technique") {
         handlePomodoroEnter();
       } else if (feature.title === "ADHD Video Interventions") {
         handleVideoEnter();
       } else if (feature.title === "My Lists") {
         handleMyListsEnter();
+      } else if (feature.title === "AI Audio Reader") {
+        handleAudioReaderEnter();
+      } else if (feature.title === "AI Conversation") {
+        handleAIConversationEnter();
       }
     };
 

@@ -24,7 +24,7 @@ const adhdVideos = [
     id: 2,
     title: "Mastering Time Management",
     description: "Essential time management strategies for neurodiverse individuals.",
-    src: "/interventions/Mastering Time Management_ Tips for the Neurodiverse.mp4",
+    src: "/grid/Mastering Time Management_ Tips for the Neurodiverse.mp4",
     thumbnail: "/thumbnails/time-management-tips.jpg",
     category: "Time Management",
     duration: "3:45",
@@ -34,7 +34,7 @@ const adhdVideos = [
     id: 3,
     title: "Optimizing Workspaces for ADHD",
     description: "Create an environment that supports focus and productivity.",
-    src: "/interventions/Optimizing Workspaces for ADHD Brains.mp4",
+    src: "/grid/Optimizing Workspaces for ADHD Brains.mp4",
     thumbnail: "/thumbnails/workspace-optimization.jpg",
     category: "Environment",
     duration: "4:12",
@@ -44,7 +44,7 @@ const adhdVideos = [
     id: 4,
     title: "Mastering Focus with ADHD",
     description: "Work smarter, not harder with proven focus techniques.",
-    src: "/interventions/Mastering Focus with ADHD_ Work Smarter, Not Harder.mp4",
+    src: "/grid/Mastering Focus with ADHD_ Work Smarter, Not Harder.mp4",
     thumbnail: "/thumbnails/focus-mastery.jpg",
     category: "Focus & Memory",
     duration: "3:58",
@@ -124,7 +124,18 @@ export default function ADHDVideosPage() {
       video.category.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+  // Debug logging for video filtering
+  React.useEffect(() => {
+    console.log('🎬 All videos:', adhdVideos);
+    console.log('🔍 Filtered videos:', filteredVideos);
+    console.log('🔍 Search query:', searchQuery);
+    console.log('📱 Active tab:', activeTab);
+  }, [filteredVideos, searchQuery, activeTab]);
+
   const handleVideoSelect = (video: typeof adhdVideos[0]) => {
+    console.log('🎬 Video selected:', video);
+    console.log('Video source:', video.src);
+    console.log('Video title:', video.title);
     setSelectedVideo(video);
     setIsPlaying(false);
     setIsMuted(false);
@@ -360,7 +371,11 @@ export default function ADHDVideosPage() {
         {/* Main Video Grid - Takes 60% when video is selected, 100% when none selected */}
         <div className={`${selectedVideo ? 'w-[45%]' : 'w-full'} transition-all duration-300 overflow-y-auto`}>
           <div className="max-w-7xl mx-auto px-8 py-16">
-                          <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
+            {/* Debug info */}
+            <div className="mb-4 text-sm text-gray-500">
+              Total videos: {filteredVideos.length} | Selected: {selectedVideo?.title || 'None'}
+            </div>
+            <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
               {filteredVideos.map((video) => (
                 <div
                   key={video.id}
@@ -395,6 +410,10 @@ export default function ADHDVideosPage() {
                     <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
                       {video.description}
                     </p>
+                    {/* Debug info */}
+                    <div className="text-xs text-gray-400 mt-2 font-mono">
+                      Source: {video.src}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -415,6 +434,9 @@ export default function ADHDVideosPage() {
                   onPlay={() => setIsPlaying(true)}
                   onPause={() => setIsPlaying(false)}
                   onEnded={() => setIsPlaying(false)}
+                  onLoadStart={() => console.log('🎥 Video loading started:', selectedVideo.src)}
+                  onLoadedData={() => console.log('✅ Video data loaded:', selectedVideo.src)}
+                  onError={(e) => console.error('❌ Video error:', e, selectedVideo.src)}
                 />
                 
                 {/* Video Controls */}

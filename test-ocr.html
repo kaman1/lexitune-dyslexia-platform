@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .result {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>OCR Service Test</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Library Loading</h2>
+        <button onclick="testLibraryLoading()">Test Library Loading</button>
+        <div id="library-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 2: PDF Processing</h2>
+        <input type="file" id="pdf-file" accept=".pdf" />
+        <button onclick="testPDFProcessing()" id="process-btn" disabled>Process PDF</button>
+        <div id="pdf-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 3: OCR Initialization</h2>
+        <button onclick="testOCRInit()">Initialize OCR</button>
+        <div id="ocr-result" class="result"></div>
+    </div>
+
+    <script>
+        // Test library loading
+        async function testLibraryLoading() {
+            const resultDiv = document.getElementById('library-result');
+            resultDiv.textContent = 'Testing library loading...';
+            
+            try {
+                // Test if we can access the libraries
+                const libraries = {
+                    'Tesseract.js': typeof Tesseract !== 'undefined',
+                    'PDF.js': typeof pdfjsLib !== 'undefined',
+                    'Window object': typeof window !== 'undefined'
+                };
+                
+                resultDiv.textContent = 'Library Status:\n' + 
+                    Object.entries(libraries)
+                        .map(([name, available]) => `${name}: ${available ? '✅ Available' : '❌ Not Available'}`)
+                        .join('\n');
+                        
+            } catch (error) {
+                resultDiv.textContent = 'Error testing libraries: ' + error.message;
+            }
+        }
+        
+        // Test PDF processing
+        async function testPDFProcessing() {
+            const resultDiv = document.getElementById('pdf-result');
+            const fileInput = document.getElementById('pdf-file');
+            
+            if (!fileInput.files[0]) {
+                resultDiv.textContent = 'Please select a PDF file first.';
+                return;
+            }
+            
+            resultDiv.textContent = 'Processing PDF...';
+            
+            try {
+                const file = fileInput.files[0];
+                console.log('File selected:', file.name, file.size, 'bytes');
+                
+                // Test basic file operations
+                const arrayBuffer = await file.arrayBuffer();
+                resultDiv.textContent = `File loaded successfully!\nName: ${file.name}\nSize: ${file.size} bytes\nArrayBuffer size: ${arrayBuffer.byteLength} bytes`;
+                
+            } catch (error) {
+                resultDiv.textContent = 'Error processing PDF: ' + error.message;
+            }
+        }
+        
+        // Test OCR initialization
+        async function testOCRInit() {
+            const resultDiv = document.getElementById('ocr-result');
+            resultDiv.textContent = 'Testing OCR initialization...';
+            
+            try {
+                if (typeof Tesseract === 'undefined') {
+                    resultDiv.textContent = 'Tesseract.js not available. Please check if the library is loaded.';
+                    return;
+                }
+                
+                resultDiv.textContent = 'Creating Tesseract worker...';
+                const worker = await Tesseract.createWorker('eng');
+                
+                resultDiv.textContent = 'Worker created successfully! Testing recognition...';
+                
+                // Test with a simple image (you can create a test image)
+                const testResult = await worker.recognize('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==');
+                
+                resultDiv.textContent = `OCR Test Result:\nText: "${testResult.data.text}"\nConfidence: ${testResult.data.confidence}`;
+                
+                await worker.terminate();
+                
+            } catch (error) {
+                resultDiv.textContent = 'Error testing OCR: ' + error.message;
+            }
+        }
+        
+        // Enable process button when file is selected
+        document.getElementById('pdf-file').addEventListener('change', function() {
+            document.getElementById('process-btn').disabled = !this.files[0];
+        });
+        
+        // Auto-run library test on page load
+        window.addEventListener('load', testLibraryLoading);
+    </script>
+</body>
+</html>

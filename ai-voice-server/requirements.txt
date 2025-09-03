@@ -1,0 +1,19 @@
+# Core dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+websockets==12.0
+python-dotenv==1.0.0
+pydantic==2.5.0
+python-multipart==0.0.6
+requests==2.31.0
+
+# OpenAI integration
+openai>=1.0.0
+
+# LiveKit Agents integration
+livekit-agents>=0.1.0
+
+# Test dependencies
+aiohttp==3.9.1
+pytest==7.4.3
+pytest-asyncio==0.21.1

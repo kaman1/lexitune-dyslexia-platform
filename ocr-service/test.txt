@@ -1,0 +1,2 @@
+This is a test PDF content for OCR testing.
+Testing OCR service with simple text.

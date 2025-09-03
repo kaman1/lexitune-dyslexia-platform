@@ -1,0 +1,18 @@
+services:
+  livekit-server:
+    image: livekit/livekit-server:latest
+    container_name: livekit-server
+    ports:
+      - "7880:7880"      # HTTP/WebSocket
+      - "7881:7881"      # TCP
+      - "50000-50100:50000-50100/udp"  # RTP ports
+    volumes:
+      - ./livekit.yaml:/config.yaml
+    command: --config /config.yaml
+    restart: unless-stopped
+    networks:
+      - livekit-network
+
+networks:
+  livekit-network:
+    driver: bridge

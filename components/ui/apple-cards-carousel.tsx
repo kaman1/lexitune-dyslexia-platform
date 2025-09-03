@@ -222,7 +222,7 @@ export const Card = ({
           <button 
             className="bg-white text-black px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-medium text-sm"
           >
-            Enter
+            {(card.title === "Cognitive Load Management" || card.title === "Adjustments") ? "Coming Soon" : "Enter"}
           </button>
         </div>
         
@@ -267,12 +267,15 @@ export const Card = ({
               // Check if this is a video card and navigate accordingly
               if (card.category === "Learning Resources" && onVideoEnter) {
                 onVideoEnter();
+              } else if (card.title === "Cognitive Load Management" || card.title === "Adjustments") {
+                // Do nothing for Cognitive Load Management and Adjustments - they're coming soon
+                return;
               } else {
                 handleOpen();
               }
             }}
           >
-            Enter
+            {(card.title === "Cognitive Load Management" || card.title === "Adjustments") ? "Coming Soon" : "Enter"}
           </button>
         </div>
         
