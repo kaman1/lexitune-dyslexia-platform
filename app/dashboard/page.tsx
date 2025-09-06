@@ -3,10 +3,12 @@
 import * as React from "react";
 import Image from "next/image";
 import { Home, Settings, CreditCard, HelpCircle, Search, Video, Volume2, TestTube, ArrowRight } from "lucide-react";
+import { toast } from "sonner";
 import { ResetIcon } from "@radix-ui/react-icons";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { DashboardOnboarding } from "@/components/dashboard-onboarding";
 import {
@@ -126,7 +128,7 @@ const readingFeatures = [
   },
   {
     src: "/2.mp4",
-    title: "ADHD Video Interventions",
+    title: "Guides and Tips",
             category: "Learning Resources",
             content: (
               <div className="space-y-6">
@@ -174,28 +176,45 @@ const readingFeatures = [
     )
   },
   {
-    src: "https://images.unsplash.com/photo-1703801602658-ee1840697ef8?q=80&w=1180&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Adjustments",
-    category: "Accessibility",
+    src: "https://images.unsplash.com/photo-1641652520432-6f8039fc4786?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "AI Agent Studio",
+    category: "Content Management",
     content: (
       <div className="space-y-6">
         <p className="text-lg text-neutral-600 dark:text-neutral-300">
-          Customizable environment controls including font sizes, color schemes, audio settings, and visual preferences to create optimal learning conditions.
+          Connect your data, create AI agents, equip them with tools, test performance, measure results, and share insights. Build and deploy intelligent learning assistants tailored to your specific needs.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-gray-50 dark:bg-gray-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Visual Customization</h4>
-            <p className="text-sm text-gray-700 dark:text-gray-200">Adjust fonts, colors, and spacing for comfort</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Connect Data</h4>
+            <p className="text-sm text-blue-700 dark:text-blue-200">Link your learning materials, documents, and knowledge sources to create a comprehensive data foundation</p>
           </div>
-          <div className="bg-gray-50 dark:bg-gray-900/20 p-4 rounded-xl">
-            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Audio Controls</h4>
-            <p className="text-sm text-gray-700 dark:text-gray-200">Manage sound levels and audio feedback</p>
+          <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-purple-900 dark:text-purple-100 mb-2">Create Agents</h4>
+            <p className="text-sm text-purple-700 dark:text-purple-200">Build custom AI agents with specialized tools, memory configurations, and learning capabilities</p>
+          </div>
+          <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl">
+            <h4 className="font-semibold text-green-900 dark:text-green-100 mb-2">Test & Share</h4>
+            <p className="text-sm text-green-700 dark:text-green-200">Test agent performance, measure results, and share insights with your learning community</p>
           </div>
         </div>
-        <div className="text-center">
+        <div className="text-center space-y-3">
           <p className="text-sm text-muted-foreground">
-            Coming Soon
+            Click the card to build and manage your AI learning agents
           </p>
+          <div className="flex justify-center space-x-2">
+            <Button 
+              size="sm" 
+              variant="outline"
+              onClick={(e) => {
+                e.stopPropagation();
+                router.push('/learning-materials/playground');
+              }}
+              className="rounded-xl"
+            >
+              🧪 Test Models
+            </Button>
+          </div>
         </div>
       </div>
     )
@@ -253,35 +272,22 @@ const videoBackgrounds = [
     category: "Mountains"
   },
   {
-    id: "sunset-clouds",
-    title: "Drone View of Clouds at Sunset",
-    src: "/hero-video/FILMPAC_drone-view-of-clouds-in-sky-at-sunset_FFAAX5624_HM.mp4",
-    thumbnail: "/thumbnails/filmpacdrone-view-of-clouds-in-sky-at-sunsetffaax5624hm.jpg",
-    category: "Sky"
-  },
-  {
-    id: "foggy-forest",
-    title: "Aerial View of Foggy Forest",
-    src: "/hero-video/FILMPAC_aerial-view-of-a-dense-forest-filled-with-fog_FFAAJ5958_HM.mp4",
-    thumbnail: "/thumbnails/filmpacaerial-view-of-a-dense-forest-filled-with-fogffaaj5958hm.jpg",
-    category: "Forest"
-  },
-  {
-    id: "oregon-river",
-    title: "Aerial View of Oregon River Woods",
-    src: "/hero-video/FILMPAC_aerial-view-of-a-river-amidst-central-oregon-woods_FFAAP6567_HM.mp4",
-    thumbnail: "/thumbnails/filmpacaerial-view-of-a-river-amidst-central-oregon-woodsffaap6567hm.jpg",
-    category: "Nature"
+    id: "audio",
+    title: "Audio Focus",
+    src: "/audio.png",
+    thumbnail: "/audio.png",
+    category: "Audio"
   }
 ];
 
 
 
 export default function Dashboard() {
+  const [isHydrated, setIsHydrated] = React.useState(false);
   const [selectedCategory, setSelectedCategory] = React.useState<string>("all");
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [isVideoMode, setIsVideoMode] = React.useState(false);
-  const [selectedVideoBackground, setSelectedVideoBackground] = React.useState(videoBackgrounds[0]);
+  const [selectedVideoBackground, setSelectedVideoBackground] = React.useState(videoBackgrounds[3]); // Default to audio image
   const [previewVideo, setPreviewVideo] = React.useState<string | null>(null);
   const [onboardingCompleted, setOnboardingCompleted] = React.useState(false);
   const router = useRouter();
@@ -319,13 +325,17 @@ export default function Dashboard() {
     window.location.href = 'http://localhost:3005';
   };
 
+  const handleLearningMaterialsEnter = () => {
+    router.push('/learning-materials');
+  };
+
   const carouselItems = filteredFeatures.map((feature, index) => {
     const handleCardClick = () => {
       if (feature.title === "Pronunciation Learning") {
         handleOGPronunciationEnter();
       } else if (feature.title === "Pomodoro Technique") {
         handlePomodoroEnter();
-      } else if (feature.title === "ADHD Video Interventions") {
+      } else if (feature.title === "Guides and Tips") {
         handleVideoEnter();
       } else if (feature.title === "My Lists") {
         handleMyListsEnter();
@@ -333,6 +343,8 @@ export default function Dashboard() {
         handleAudioReaderEnter();
       } else if (feature.title === "AI Conversation") {
         handleAIConversationEnter();
+      } else if (feature.title === "AI Agent Studio") {
+        handleLearningMaterialsEnter();
       }
     };
 
@@ -346,12 +358,29 @@ export default function Dashboard() {
   // Get unique categories for the dropdown
   const categories = ["all", ...Array.from(new Set(readingFeatures.map(f => f.category)))];
 
-  // Check if onboarding is completed
+  // Handle hydration and localStorage loading
   React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const completed = window.localStorage.getItem("feature_intro-demo") === "true";
-      setOnboardingCompleted(completed);
+    setIsHydrated(true);
+    
+    // Load saved background settings from localStorage
+    const savedVideoMode = localStorage.getItem('dashboard-video-mode');
+    if (savedVideoMode) {
+      setIsVideoMode(savedVideoMode === 'true');
     }
+    
+    const savedVideoBackground = localStorage.getItem('dashboard-video-background');
+    if (savedVideoBackground) {
+      try {
+        const parsed = JSON.parse(savedVideoBackground);
+        setSelectedVideoBackground(parsed);
+      } catch (error) {
+        console.error('Failed to parse saved video background:', error);
+      }
+    }
+    
+    // Check if onboarding is completed
+    const completed = window.localStorage.getItem("feature_intro-demo") === "true";
+    setOnboardingCompleted(completed);
   }, []);
 
   // Listen for onboarding completion
@@ -367,16 +396,38 @@ export default function Dashboard() {
     };
   }, []);
 
+  // Save background settings to localStorage when they change
+  React.useEffect(() => {
+    if (isHydrated && typeof window !== 'undefined') {
+      localStorage.setItem('dashboard-video-mode', isVideoMode.toString());
+      // Show toast confirmation for video mode change (only after hydration)
+      toast.success(`${isVideoMode ? 'Video' : 'Image'} mode saved!`, {
+        description: `Dashboard background mode switched to ${isVideoMode ? 'video' : 'image'}.`
+      });
+    }
+  }, [isVideoMode, isHydrated]);
+
+  React.useEffect(() => {
+    if (isHydrated && typeof window !== 'undefined') {
+      localStorage.setItem('dashboard-video-background', JSON.stringify(selectedVideoBackground));
+      // Show toast confirmation for video background change (only after hydration)
+      toast.success(`${selectedVideoBackground.title} saved!`, {
+        description: "Your dashboard video background preference has been updated."
+      });
+    }
+  }, [selectedVideoBackground, isHydrated]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-50">
       {/* Header - 30% of page */}
       <div className="h-[30vh] relative overflow-hidden">
         {/* Background Image/Video */}
-        {isVideoMode ? (
+        {isHydrated && isVideoMode ? (
           <video
-            autoPlay
-            muted
-            loop
+            autoPlay={true}
+            muted={true}
+            loop={true}
+            playsInline={true}
             className="w-full h-full object-cover"
             src={selectedVideoBackground.src}
           />
@@ -433,10 +484,10 @@ export default function Dashboard() {
         {/* Header Content */}
         <div className="absolute inset-0 flex items-center justify-between">
           <div className="text-left text-white ml-16 max-w-4xl" style={{marginLeft: '15%'}}>
-            <h1 className="text-3xl md:text-4xl font-medium mb-3">
+            <h1 className="text-2xl md:text-3xl font-medium mb-2">
               Welcome back Christian
             </h1>
-            <p className="text-base md:text-lg opacity-90 max-w-2xl mb-4">
+            <p className="text-sm md:text-base opacity-90 max-w-xl mb-3">
               Your comprehensive neurodivergent support solution, featuring AI-enhanced tools and apps designed to empower your unique learning journey.
             </p>
             
@@ -550,7 +601,7 @@ export default function Dashboard() {
                 Your Neurodivergent Support Tools
               </h2>
               <p className="text-base text-zinc-600 text-left max-w-2xl">
-                Explore our comprehensive suite of AI-powered tools and apps designed to support neurodivergent individuals with personalized, research-backed approaches.
+                AI-powered pronunciation learning, Pomodoro focus timer, voice conversations, task management, and accessibility tools.
               </p>
             </div>
             

@@ -13,6 +13,14 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { MobileOnboarding } from "@/components/mobile-onboarding";
 
+// Type definitions for browser APIs
+declare global {
+  interface Window {
+    AudioContext: new () => AudioContext;
+    webkitAudioContext: new () => AudioContext;
+  }
+}
+
 
 // Video background options (same as dashboard)
 const videoBackgrounds = [
@@ -60,15 +68,118 @@ const videoBackgrounds = [
   }
 ];
 
-const initialState: Item[] = [];
+const initialState: Item[] = [
+  {
+    id: 1,
+    text: "Complete React course module",
+    description: "Finish advanced state management section - estimated 90 minutes",
+    checked: false,
+    isCompleted: false,
+    isRunning: false,
+    remainingTime: 90,
+    priority: "medium",
+    category: "learning",
+    energyLevel: "high",
+    complexity: "moderate",
+    originalTodoId: "learning-1",
+    originalListId: "learning",
+    originalCategory: "learning",
+    originalPriority: "medium",
+    originalEstimatedTime: 90,
+    originalDueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    originalTags: ["react", "programming"]
+  },
+  {
+    id: 2,
+    text: "Build Python data visualization project",
+    description: "Create interactive charts using matplotlib and pandas for climate data analysis - estimated 120 minutes",
+    checked: false,
+    isCompleted: false,
+    isRunning: false,
+    remainingTime: 120,
+    priority: "high",
+    category: "learning",
+    energyLevel: "high",
+    complexity: "moderate",
+    originalTodoId: "learning-2",
+    originalListId: "learning",
+    originalCategory: "learning",
+    originalPriority: "high",
+    originalEstimatedTime: 120,
+    originalDueDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    originalTags: ["python", "data-science", "visualization"]
+  },
+  {
+    id: 3,
+    text: "Review quarterly reports",
+    description: "Analyze Q3 performance metrics and prepare summary - estimated 120 minutes",
+    checked: false,
+    isCompleted: false,
+    isRunning: false,
+    remainingTime: 120,
+    priority: "high",
+    category: "work",
+    energyLevel: "medium",
+    complexity: "moderate",
+    originalTodoId: "work-1",
+    originalListId: "work",
+    originalCategory: "work",
+    originalPriority: "high",
+    originalEstimatedTime: 120,
+    originalDueDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    originalTags: ["reports", "analysis"]
+  },
+  {
+    id: 4,
+    text: "Complete Arduino robotics tutorial",
+    description: "Build and program a simple line-following robot with sensors - estimated 180 minutes",
+    checked: false,
+    isCompleted: false,
+    isRunning: false,
+    remainingTime: 180,
+    priority: "medium",
+    category: "learning",
+    energyLevel: "medium",
+    complexity: "complex",
+    originalTodoId: "learning-3",
+    originalListId: "learning",
+    originalCategory: "learning",
+    originalPriority: "medium",
+    originalEstimatedTime: 180,
+    originalDueDate: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    originalTags: ["arduino", "robotics", "electronics"]
+  },
+  {
+    id: 5,
+    text: "Write blog post draft",
+    description: "Outline and write first draft of productivity tips article - estimated 90 minutes",
+    checked: false,
+    isCompleted: false,
+    isRunning: false,
+    remainingTime: 90,
+    priority: "medium",
+    category: "creative",
+    energyLevel: "high",
+    complexity: "moderate",
+    originalTodoId: "creative-1",
+    originalListId: "creative",
+    originalCategory: "creative",
+    originalPriority: "medium",
+    originalEstimatedTime: 90,
+    originalDueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    originalTags: ["writing", "blog"]
+  }
+];
 
 export default function PomodoroPage() {
+  const [isHydrated, setIsHydrated] = React.useState(false);
+  
   // Mobile onboarding state - start with true to show automatically
   const [showMobileOnboarding, setShowMobileOnboarding] = React.useState(true);
 
   // Sound notification state
   const [isSoundEnabled, setIsSoundEnabled] = React.useState(true);
-  const [audioContext, setAudioContext] = React.useState<AudioContext | null>(null);
+  const [audioContext, setAudioContext] = React.useState<any>(null);
 
   // Initialize audio context for sound notifications
   React.useEffect(() => {
@@ -143,7 +254,7 @@ export default function PomodoroPage() {
   
   // Background state
   const [isVideoMode, setIsVideoMode] = React.useState(false);
-  const [selectedVideoBackground, setSelectedVideoBackground] = React.useState(videoBackgrounds[0]);
+  const [selectedVideoBackground, setSelectedVideoBackground] = React.useState(videoBackgrounds[3]); // Default to audio image
   const [backgroundBlur, setBackgroundBlur] = React.useState(0);
   const [darkOverlay, setDarkOverlay] = React.useState(0);
   const [isAccordionOpen, setIsAccordionOpen] = React.useState(false);
@@ -159,7 +270,43 @@ export default function PomodoroPage() {
   const [currentRunningItem, setCurrentRunningItem] = React.useState<number | null>(null);
   const [isTimerOpen, setIsTimerOpen] = React.useState(false);
 
-
+  // Handle hydration and localStorage loading
+  React.useEffect(() => {
+    setIsHydrated(true);
+    
+    // Load saved background settings from localStorage if available
+    const savedVideoMode = localStorage.getItem('pomodoro-video-mode');
+    if (savedVideoMode) {
+      setIsVideoMode(savedVideoMode === 'true');
+    }
+    
+    const savedVideoBackground = localStorage.getItem('pomodoro-video-background');
+    if (savedVideoBackground) {
+      try {
+        const parsed = JSON.parse(savedVideoBackground);
+        setSelectedVideoBackground(parsed);
+      } catch (error) {
+        console.error('Failed to parse saved video background:', error);
+      }
+    }
+    
+    // Load saved background effects
+    const savedBackgroundBlur = localStorage.getItem('pomodoro-background-blur');
+    if (savedBackgroundBlur) {
+      setBackgroundBlur(parseInt(savedBackgroundBlur));
+    }
+    
+    const savedDarkOverlay = localStorage.getItem('pomodoro-dark-overlay');
+    if (savedDarkOverlay) {
+      setDarkOverlay(parseInt(savedDarkOverlay));
+    }
+    
+    // Load saved color background state
+    const savedColorBackground = localStorage.getItem('pomodoro-color-background');
+    if (savedColorBackground) {
+      setIsColorBackground(savedColorBackground === 'true');
+    }
+  }, []);
 
   // Timer effect for individual items
   React.useEffect(() => {
@@ -827,11 +974,12 @@ export default function PomodoroPage() {
             opacity: 1 - (backgroundBlur * 0.005)
           }}
         />
-      ) : isVideoMode ? (
+      ) : (isHydrated && isVideoMode) ? (
         <video
-          autoPlay
-          muted
-          loop
+          autoPlay={true}
+          muted={true}
+          loop={true}
+          playsInline={true}
           className="fixed inset-0 w-full h-full object-cover z-0"
           src={selectedVideoBackground.src}
           style={{
@@ -868,7 +1016,7 @@ export default function PomodoroPage() {
           <div className="max-w-7xl mx-auto">
             <button
               onClick={goBackToDashboard}
-              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-black hover:bg-gray-800 rounded-full transition-colors"
+              className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-800 bg-white hover:bg-gray-50 rounded-full transition-colors border border-gray-200"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back
@@ -887,7 +1035,7 @@ export default function PomodoroPage() {
                 className="p-6 cursor-pointer bg-black hover:bg-gray-900 transition-colors rounded-t-xl"
               >
                 <div className="flex items-center justify-between">
-                  <h2 className="text-4xl font-bold text-white">Focus Timer</h2>
+                  <h2 className="text-4xl font-bold text-white">Pomodoro Technique</h2>
                   <div className="bg-gray-700 hover:bg-gray-600 rounded-full p-2 transition-colors">
                     <ChevronDown 
                       className={cn(
@@ -925,7 +1073,7 @@ export default function PomodoroPage() {
                             {items.find(item => item.id === openItemId)?.text || "No task selected"}
                           </h3>
                           <p className="text-sm text-gray-400 mt-1">
-                            {items.find(item => item.id === openItemId)?.description || "Open a task to start your Pomodoro session"}
+                            {items.find(item => item.id === openItemId)?.description || "Open a task to start your Pomodoro Technique session"}
                           </p>
                         </>
                       )}
@@ -981,7 +1129,7 @@ export default function PomodoroPage() {
                   {/* Task Selection Hint */}
                   {!currentRunningItem && !openItemId && (
                     <p className="text-sm text-gray-500 mt-4">
-                      💡 Open a task below to start your Pomodoro session
+                                              💡 Open a task below to start your Pomodoro Technique session
                     </p>
                   )}
                 </div>
@@ -1087,9 +1235,20 @@ export default function PomodoroPage() {
                       <span className="text-xs text-gray-300">Dark Background</span>
                       <button
                         onClick={() => {
-                          setIsColorBackground(!isColorBackground);
-                          if (!isColorBackground) {
+                          const newColorMode = !isColorBackground;
+                          setIsColorBackground(newColorMode);
+                          
+                          // Save color background state to localStorage
+                          if (isHydrated) {
+                            localStorage.setItem('pomodoro-color-background', newColorMode.toString());
+                          }
+                          
+                          // If turning on color background, turn off video mode
+                          if (newColorMode) {
                             setIsVideoMode(false);
+                            if (isHydrated) {
+                              localStorage.setItem('pomodoro-video-mode', 'false');
+                            }
                           }
                         }}
                         className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
@@ -1109,7 +1268,22 @@ export default function PomodoroPage() {
                   <div className="flex flex-col items-center px-2 pt-2 border-t border-gray-600">
                     <span className="text-white text-sm font-medium mb-2">Background Type</span>
                     <button
-                      onClick={() => setIsVideoMode(!isVideoMode)}
+                      onClick={() => {
+                        const newMode = !isVideoMode;
+                        setIsVideoMode(newMode);
+                        
+                        // If turning on video mode, turn off color background
+                        if (newMode) {
+                          setIsColorBackground(false);
+                          if (isHydrated) {
+                            localStorage.setItem('pomodoro-color-background', 'false');
+                          }
+                        }
+                        
+                        if (isHydrated) {
+                          localStorage.setItem('pomodoro-video-mode', newMode.toString());
+                        }
+                      }}
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                         isVideoMode ? 'bg-blue-600' : 'bg-gray-600'
                       }`}
@@ -1132,7 +1306,12 @@ export default function PomodoroPage() {
                       <span className="text-white text-sm font-medium">Video:</span>
                       <Select value={selectedVideoBackground.id} onValueChange={(value) => {
                         const video = videoBackgrounds.find(v => v.id === value);
-                        if (video) setSelectedVideoBackground(video);
+                        if (video) {
+                          setSelectedVideoBackground(video);
+                          if (isHydrated) {
+                            localStorage.setItem('pomodoro-video-background', JSON.stringify(video));
+                          }
+                        }
                       }}>
                         <SelectTrigger className="w-full">
                           <SelectValue placeholder="Select video background" />
@@ -1163,7 +1342,13 @@ export default function PomodoroPage() {
                         min="0"
                         max="100"
                         value={backgroundBlur}
-                        onChange={(e) => setBackgroundBlur(parseInt(e.target.value))}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value);
+                          setBackgroundBlur(value);
+                          if (isHydrated) {
+                            localStorage.setItem('pomodoro-background-blur', value.toString());
+                          }
+                        }}
                         className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
                       />
                     </div>
@@ -1179,7 +1364,13 @@ export default function PomodoroPage() {
                         min="0"
                         max="100"
                         value={darkOverlay}
-                        onChange={(e) => setDarkOverlay(parseInt(e.target.value))}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value);
+                          setDarkOverlay(value);
+                          if (isHydrated) {
+                            localStorage.setItem('pomodoro-dark-overlay', value.toString());
+                          }
+                        }}
                         className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
                       />
                     </div>

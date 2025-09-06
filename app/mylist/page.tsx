@@ -1,8 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 import { 
   Plus, 
@@ -114,12 +115,64 @@ export default function MyListPage() {
     }
   ];
 
-  const [headerBackground, setHeaderBackground] = useState(headerBackgrounds[0]);
-  const [isVideoMode, setIsVideoMode] = useState(false);
+  const [headerBackground, setHeaderBackground] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('mylist-header-background');
+      return saved || headerBackgrounds[0];
+    }
+    return headerBackgrounds[0];
+  });
   
-  const [selectedVideoBackground, setSelectedVideoBackground] = useState(videoBackgrounds[0]);
+  const [isVideoMode, setIsVideoMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('mylist-video-mode');
+      return saved === 'true';
+    }
+    return false;
+  });
+  
+  const [selectedVideoBackground, setSelectedVideoBackground] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('mylist-video-background');
+      const parsed = saved ? JSON.parse(saved) : null;
+      return parsed || videoBackgrounds[0];
+    }
+    return videoBackgrounds[0];
+  });
+  
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
+  // Save background settings to localStorage when they change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('mylist-header-background', headerBackground);
+      // Show toast confirmation for image background change
+      const backgroundName = headerBackgrounds.findIndex(bg => bg === headerBackground) + 1;
+      toast.success(`Background ${backgroundName} saved!`, {
+        description: "Your image background preference has been updated."
+      });
+    }
+  }, [headerBackground]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('mylist-video-mode', isVideoMode.toString());
+      // Show toast confirmation for video mode change
+      toast.success(`${isVideoMode ? 'Video' : 'Image'} mode saved!`, {
+        description: `Background mode switched to ${isVideoMode ? 'video' : 'image'}.`
+      });
+    }
+  }, [isVideoMode]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('mylist-video-background', JSON.stringify(selectedVideoBackground));
+      // Show toast confirmation for video background change
+      toast.success(`${selectedVideoBackground.title} saved!`, {
+        description: "Your video background preference has been updated."
+      });
+    }
+  }, [selectedVideoBackground]);
 
   
   const {
@@ -286,7 +339,7 @@ export default function MyListPage() {
             <div className="mb-6">
               <button
                 onClick={goBackToDashboard}
-                className="inline-flex items-center justify-center px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium border border-white/20 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 rounded-xl shadow-sm"
+                className="inline-flex items-center justify-center px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium border border-gray-200 bg-white text-gray-800 hover:bg-gray-50 hover:scale-105 transition-all duration-300 rounded-xl shadow-sm"
               >
                 <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                 Back to Dashboard

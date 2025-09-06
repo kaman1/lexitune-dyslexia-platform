@@ -4,22 +4,13 @@ import { Play, Pause, Volume2, VolumeX, RotateCcw, X, ArrowLeft, Search, Chevron
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { toast } from "sonner";
 
 
 
 
 // ADHD Intervention Videos
 const adhdVideos = [
-  {
-    id: 1,
-    title: "Focus and Memory Tips",
-    description: "General tips to improve focus and memory.",
-    src: "/2.mp4",
-    thumbnail: "/thumbnails/focus-memory-tips.jpg",
-    category: "Focus & Memory",
-    duration: "0:15",
-    fullContent: "This video provides general tips for improving focus and memory. These strategies can help anyone looking to enhance their cognitive performance and concentration skills."
-  },
   {
     id: 2,
     title: "Mastering Time Management",
@@ -32,24 +23,15 @@ const adhdVideos = [
   },
   {
     id: 3,
-    title: "Optimizing Workspaces for ADHD",
-    description: "Create an environment that supports focus and productivity.",
-    src: "/grid/Optimizing Workspaces for ADHD Brains.mp4",
-    thumbnail: "/thumbnails/workspace-optimization.jpg",
-    category: "Environment",
-    duration: "4:12",
-    fullContent: "Discover how to design your workspace to minimize distractions and maximize focus. Learn environmental modifications that can significantly improve your ability to concentrate and complete tasks."
+    title: "Enhance",
+    description: "Enhance understanding and retention techniques.",
+    src: "/grid/2minute rule.mp4",
+    thumbnail: "/grid/2.png",
+    category: "Learning Enhancement",
+    duration: "2:00",
+    fullContent: "Advanced techniques to enhance understanding and retention for neurodivergent learners. This video covers proven methods to improve comprehension and memory retention."
   },
-  {
-    id: 4,
-    title: "Mastering Focus with ADHD",
-    description: "Work smarter, not harder with proven focus techniques.",
-    src: "/grid/Mastering Focus with ADHD_ Work Smarter, Not Harder.mp4",
-    thumbnail: "/thumbnails/focus-mastery.jpg",
-    category: "Focus & Memory",
-    duration: "3:58",
-    fullContent: "Master the art of maintaining focus with ADHD. This video teaches you how to work smarter by understanding your attention patterns and using research-backed strategies to stay on task."
-  }
+
 ];
 
 // Video background options
@@ -76,25 +58,11 @@ const videoBackgrounds = [
     category: "Mountains"
   },
   {
-    id: "sunset-clouds",
-    title: "Drone View of Clouds at Sunset",
-    src: "/hero-video/FILMPAC_drone-view-of-clouds-in-sky-at-sunset_FFAAX5624_HM.mp4",
-    thumbnail: "/thumbnails/filmpacdrone-view-of-clouds-in-sky-at-sunsetffaax5624hm.jpg",
-    category: "Sky"
-  },
-  {
-    id: "foggy-forest",
-    title: "Aerial View of Foggy Forest",
-    src: "/hero-video/FILMPAC_aerial-view-of-a-dense-forest-filled-with-fog_FFAAJ5958_HM.mp4",
-    thumbnail: "/thumbnails/filmpacaerial-view-of-a-dense-forest-filled-with-fogffaaj5958hm.jpg",
-    category: "Forest"
-  },
-  {
-    id: "oregon-river",
-    title: "Aerial View of Oregon River Woods",
-    src: "/hero-video/FILMPAC_aerial-view-of-a-river-amidst-central-oregon-woods_FFAAP6567_HM.mp4",
-    thumbnail: "/thumbnails/filmpacaerial-view-of-a-river-amidst-central-oregon-woodsffaap6567hm.jpg",
-    category: "Nature"
+    id: "audio",
+    title: "Audio Focus",
+    src: "/audio.png",
+    thumbnail: "/audio.png",
+    category: "Audio"
   }
 ];
 
@@ -102,6 +70,7 @@ const videoBackgrounds = [
 const categories = ["All", ...Array.from(new Set(adhdVideos.map(video => video.category)))];
 
 export default function ADHDVideosPage() {
+  const [isHydrated, setIsHydrated] = React.useState(false);
   const [selectedVideo, setSelectedVideo] = React.useState<typeof adhdVideos[0] | null>(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [isMuted, setIsMuted] = React.useState(false);
@@ -131,6 +100,27 @@ export default function ADHDVideosPage() {
     console.log('🔍 Search query:', searchQuery);
     console.log('📱 Active tab:', activeTab);
   }, [filteredVideos, searchQuery, activeTab]);
+
+  // Handle hydration and localStorage loading
+  React.useEffect(() => {
+    setIsHydrated(true);
+    
+    // Load saved background settings from localStorage if available
+    const savedVideoMode = localStorage.getItem('videos-video-mode');
+    if (savedVideoMode) {
+      setIsVideoMode(savedVideoMode === 'true');
+    }
+    
+    const savedVideoBackground = localStorage.getItem('videos-video-background');
+    if (savedVideoBackground) {
+      try {
+        const parsed = JSON.parse(savedVideoBackground);
+        setSelectedVideoBackground(parsed);
+      } catch (error) {
+        console.error('Failed to parse saved video background:', error);
+      }
+    }
+  }, []);
 
   const handleVideoSelect = (video: typeof adhdVideos[0]) => {
     console.log('🎬 Video selected:', video);
@@ -219,7 +209,7 @@ export default function ADHDVideosPage() {
             <div className="mb-6">
               <button
                 onClick={goBackToDashboard}
-                className="inline-flex items-center justify-center px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium border border-white/20 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 rounded-xl shadow-sm"
+                className="inline-flex items-center justify-center px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium border border-gray-200 bg-white text-gray-800 hover:bg-gray-50 hover:scale-105 transition-all duration-300 rounded-xl shadow-sm"
               >
                 <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                 Back to Dashboard
@@ -229,10 +219,10 @@ export default function ADHDVideosPage() {
             {/* Header Content - Left Aligned */}
             <div className="text-left max-w-4xl">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                Neurodivergent Learning Resources
+                Guides and Tips
               </h1>
               <p className="text-sm sm:text-base md:text-lg text-white/90 mb-6 leading-relaxed">
-                Evidence-based video resources and practical strategies for neurodivergent individuals, including time management, workspace optimization, and focus techniques backed by research.
+                Research-backed video interventions designed specifically for adults with ADHD, featuring participatory design and evidence-based techniques from clinical studies.
               </p>
               
               <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm">
@@ -275,7 +265,16 @@ export default function ADHDVideosPage() {
                 <div className="flex items-center space-x-3">
                   <span className="text-gray-700 text-sm font-medium">Image Background</span>
                   <button
-                    onClick={() => setIsVideoMode(!isVideoMode)}
+                    onClick={() => {
+                      const newMode = !isVideoMode;
+                      setIsVideoMode(newMode);
+                      if (isHydrated) {
+                        localStorage.setItem('videos-video-mode', newMode.toString());
+                        toast.success(`${newMode ? 'Video' : 'Image'} mode saved!`, {
+                          description: `Videos page background mode switched to ${newMode ? 'video' : 'image'}.`
+                        });
+                      }
+                    }}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                       isVideoMode ? 'bg-blue-600' : 'bg-gray-300'
                     }`}
@@ -295,7 +294,15 @@ export default function ADHDVideosPage() {
                     <span className="text-gray-700 text-sm font-medium">Video:</span>
                     <Select value={selectedVideoBackground.id} onValueChange={(value) => {
                       const selected = videoBackgrounds.find(v => v.id === value);
-                      if (selected) setSelectedVideoBackground(selected);
+                      if (selected) {
+                        setSelectedVideoBackground(selected);
+                        if (isHydrated) {
+                          localStorage.setItem('videos-video-background', JSON.stringify(selected));
+                          toast.success(`${selected.title} saved!`, {
+                            description: "Your videos page video background preference has been updated."
+                          });
+                        }
+                      }
                     }}>
                       <SelectTrigger className="w-auto min-w-64 rounded-full">
                         <SelectValue placeholder="Select video background" />

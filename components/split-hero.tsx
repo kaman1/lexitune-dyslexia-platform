@@ -64,11 +64,11 @@ export function SplitHero() {
         <div className="max-w-[1536px] mx-auto px-4 h-full relative z-20">
           <div className="flex flex-col h-full justify-end md:justify-center items-start pb-8 md:pt-16 text-left max-w-sm md:max-w-4xl ml-4 md:ml-8 lg:ml-12">
             {/* Main heading - no overlay */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-4 text-white text-left leading-tight animate-in fade-in slide-in-from-left duration-1000 delay-300">
-              Empowering<br />Neurodivergent<br />Minds
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-4 text-white text-left leading-tight animate-in fade-in slide-in-from-left duration-1000 delay-300">
+              Self Adaptive<br />Platform
             </h1>
                           <p className="mt-6 text-lg text-gray-200 max-w-3xl">
-                Orton-Gillingham reading instruction, Pomodoro time management, and evidence-based cognitive strategies. Our AI amplifies what research shows works.
+                AI self-adaptive platform designed to help students and professionals in their pedagogy of learning.
               </p>
 
             {/* CTA Buttons */}
